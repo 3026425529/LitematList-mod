@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'source/*.zip'
+      - '*.zip'
       - '.github/workflows/build-26.3.yml'
 
 jobs:
@@ -34,7 +34,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          archive=$(find source -maxdepth 1 -type f -name '*.zip' | head -n1)
+          archive=$(find . -maxdepth 1 -type f -name '*.zip' ! -name 'gradle.zip' | head -n1)
           test -n "$archive"
           rm -rf project
           mkdir project
